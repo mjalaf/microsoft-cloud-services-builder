@@ -1,0 +1,52 @@
+[
+  {
+    "name": "Build an API",
+    "cssClass": "bg-int",
+    "serviceNames": [
+      "App Service",
+      "Azure Functions",
+      "API Management"
+    ]
+  },
+  {
+    "name": "Build a Web App",
+    "cssClass": "bg-web",
+    "serviceNames": [
+      "App Service",
+      "Azure Active Directory",
+      "Azure AD B2C",
+      "Azure Functions",
+      "Azure Storage",
+      "Cosmos DB",
+      "Database for MariaDB",
+      "Database for MySQL",
+      "Database for PostgreSQL",
+      "Microsoft Graph",
+      "SignalR Service",
+      "Static Web Apps",
+      "SQL Database"
+    ]
+  },
+  {
+    "name": "Use Containers",
+    "cssClass": "bg-cmp",
+    "serviceNames": [
+      "App Service",
+      "Container Apps",
+      "Container Instances",
+      "Container Registry",
+      "Kubernetes Service"
+    ]
+  },
+  {
+    "name": "Integrate Microsoft 365 Data",
+    "cssClass": "bg-365",
+    "serviceNames": [
+      "Azure Active Directory",
+      "Microsoft Graph",
+      "Power Apps",
+      "Power BI",
+      "Power Automate"
+    ]
+  }
+]
