@@ -5,7 +5,7 @@ export async function getProductsCategoryfromCosmosDb() : Promise<IProductCatego
 {
     const { container }  = await getCosmosDBContainer();
 
-    return container.items.query("SELECT c.id,c.name,c.description,c.cssClass,c.link from c WHERE c.partitionKey = 'ProductCategory'")
-        .fetchAll();
-    
+    const { resources } = await container.items.query("SELECT c.id,c.name,c.description,c.cssClass,c.link from c WHERE c.partitionKey = 'ProductCategory'")
+    .fetchAll();
+    return resources;
 }

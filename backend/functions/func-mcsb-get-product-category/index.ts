@@ -5,7 +5,7 @@ import { IProductCategory } from "../shared/interfaces";
 const httpTrigger: AzureFunction = async function (context: Context, req: HttpRequest): Promise<void> {
 
     try {
-        let productCategories : IProductCategory[] = await getProductsCategory();
+        let productCategories = await getProductsCategory();
     
         context.res = {
             status: 200, 
