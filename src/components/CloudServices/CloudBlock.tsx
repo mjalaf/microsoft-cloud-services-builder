@@ -15,7 +15,7 @@ export default function CloudBlock(props: ICloudBlockData) {
                 </div>
             )}
             {image && 
-                <img src={`/images/${image}`} alt="icon" className="icon" draggable="false"></img>
+                <img src={`${image}`} alt="icon" className="icon" draggable="false"></img>
             }
             {name}
         </div>

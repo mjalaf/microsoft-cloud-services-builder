@@ -213,6 +213,10 @@ div[role=tabpanel] {
   background-color: #b817a2 !important;
   color: #fff !important;
 }
+.bg-gn {
+  background-color: #6c757d !important;
+  color: #fff !important;
+}
 
 .bg-st {
   background-color: #a2b817 !important;

@@ -1,0 +1,86 @@
+[
+  {
+    "name": "Build an API",
+    "cssClass": "bg-int",
+    "scenenarios": [
+      {
+        "id": "AZPROD-20-2",
+        "name": "App Service"        
+     },
+     {
+      "id": "AZPROD-10-21",
+      "name": "Azure Functions"    
+     },
+     {
+       "id": "AZPROD-10-0",
+       "name": "API Management"       
+     }
+    ]
+  },
+  {
+    "name": "Build a Web App",
+    "cssClass": "bg-web",
+    "scenenarios": [
+     {
+        "id": "AZPROD-20-2",
+        "name": "App Service"        
+     },
+     {
+      "id": "AZPROD-4-3",
+      "name": "Azure Database for MariaDB"        
+     },
+     {
+      "id": "AZPROD-4-4",
+      "name": "Azure Database for MySQL"        
+     },
+     {
+      "id": "AZPROD-20-8",
+      "name": "Static Web Apps"       
+     }  
+    ]
+  },
+  {
+    "name": "Use Containers",
+    "cssClass": "bg-cmp",
+    "scenenarios": [
+    {
+        "id": "AZPROD-20-2",
+        "name": "App Service"        
+     },
+     {
+      "id": "AZPROD-3-3",
+      "name": "Azure Container Apps"        
+     },
+     {
+      "id": "AZPROD-2-18",
+      "name": "Azure Container Instances"        
+     },
+     {
+      "id": "AZPROD-3-8",
+      "name": "Azure Container Registry"       
+     },
+     {
+      "id": "AZPROD-2-16",
+      "name": "Azure Kubernetes Service"      
+     } 
+    ]
+  },
+  {
+    "name": "Integrate Microsoft 365 Data",
+    "cssClass": "bg-365",
+    "scenenarios": [
+      {
+        "id": "AZPROD-7-0",
+        "name": "Azure Active Directory"        
+     },
+     {
+      "id": "AZPROD-1-16",
+      "name":  "Microsoft Graph"        
+     },
+     {
+      "id": "AZPROD-1-13",
+      "name":  "Power BI"       
+     }
+    ]
+  }
+]

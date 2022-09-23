@@ -1,0 +1,47 @@
+[
+  {
+    "name": "Distributed",
+    "cssClass": "bg-int",
+    "architectures": [
+      {
+        "id": "ARCH-GEN",
+        "name": "Hybrid geo-distributed",
+        
+        "components":  [ {
+          "id": "AZPROD-20-2",
+          "name": "App Service"        
+       },
+       {
+        "id": "AZPROD-10-21",
+        "name": "Azure Functions"    
+       },
+       {
+         "id": "AZPROD-10-0",
+         "name": "API Management"       
+       }        
+    ]},
+     {
+      "id": "ARCH-GEN",
+      "name": "Hybrid relay connection in Azure and Azure Stack Hub"    
+     }
+    ]
+  },
+  {
+    "name": "Web Farm",
+    "cssClass": "bg-web",
+    "architectures": [
+     {
+        "id": "ARCH-GEN",
+        "name": "Single Server"        
+     },
+     {
+      "id": "ARCH-GEN",
+      "name": "Multi Server"        
+     },
+     {
+      "id": "ARCH-GEN",
+      "name": "Geo Redundant"        
+     }
+    ]
+  }
+]

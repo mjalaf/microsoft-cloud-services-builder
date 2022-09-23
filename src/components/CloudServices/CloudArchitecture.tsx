@@ -3,14 +3,13 @@ import { styled } from '@mui/material/styles';
 import Tooltip, { TooltipProps, tooltipClasses } from '@mui/material/Tooltip';
 import Typography from '@mui/material/Typography';
 
-import { IService, IServiceCategory } from 'shared/interfaces';
+import { IServiceArchitecture, IServiceCategory } from 'shared/interfaces';
 import CloudBlock from './CloudBlock';
-import { JsxElement } from 'typescript';
 
-export default  function CloudService(props: { serviceCategory: IServiceCategory, service: IService  })   {
-    const {serviceCategory, service} = props;
+export default  function CloudArchitecture(props: { serviceCategory: IServiceCategory, architecture: IServiceArchitecture  })   {
+    const {serviceCategory, architecture} = props;
 
-    function onDragStart(event: React.DragEvent, service: IService) {
+    function onDragStart(event: React.DragEvent, service: IServiceArchitecture) {
         const dragData = { 
             ...service, 
             category: serviceCategory.name,
@@ -38,21 +37,21 @@ export default  function CloudService(props: { serviceCategory: IServiceCategory
         <HtmlTooltip
             title={
                 <>
-                    <Typography color="inherit">{service.name}</Typography>
-                    <div className="tooltip-description">{service.description}</div>
-                    {service.relatedServices && (
-                        <div className="tooltip-related-services">Related services: {service.relatedServices.join(', ')}</div>
+                    <Typography color="inherit">{architecture.name}</Typography>
+                    <div className="tooltip-description">{architecture.description}</div>
+                    {architecture.relatedServices && (
+                        <div className="tooltip-related-services">Related services: {architecture.relatedServices.join(', ')}</div>
                     )}
                 </>
             }
         >
-            <div key={service.name} 
-                className={`${serviceCategory.cssClass !== undefined ? serviceCategory.cssClass : "bg-gn"} service-picker-item service-picker-item-size cursor-drag-drop`}
-                onDragStart={(event) => onDragStart(event, service)} draggable
+            <div key={architecture.name} 
+                className={`${serviceCategory.cssClass} service-picker-item service-picker-item-size cursor-drag-drop`}
+                onDragStart={(event) => onDragStart(event, architecture)} draggable
             >
-                <CloudBlock name={service.name} 
-                    description={service.description} 
-                    image={service.image} 
+                <CloudBlock name={architecture.name} 
+                    description={architecture.description} 
+                    image={architecture.image} 
                     cssClass={serviceCategory.cssClass}
                 />
             </div>

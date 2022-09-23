@@ -59,6 +59,7 @@ function App() {
                             <Tabs value={value} onChange={handleChange} aria-label="basic tabs example">
                                 <Tab label="Cloud Categories" />
                                 <Tab label="Cloud Scenarios" />
+                                <Tab label="Cloud Architecture" />
                             </Tabs>
                         </Box>
                         <TabPanel value={value} index={0}>
@@ -66,6 +67,9 @@ function App() {
                         </TabPanel>
                         <TabPanel value={value} index={1}>
                             <CloudServicePicker categoryType="scenarios" />
+                        </TabPanel>
+                        <TabPanel value={value} index={2}>
+                            <CloudServicePicker categoryType="architecture" />
                         </TabPanel>
                     </div>
                     <div className="app-bottom-row">

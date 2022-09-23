@@ -12,7 +12,7 @@ export default function DocsContent(props: {selectedServices: IService[]}) {
                         <div>
                             <div className="image-title-container mb-10 bg-light-gray">
                                 <span className="bg-main">
-                                    <img src={service.image ? `/images/${service.image}` : '/images/microsoft-docs.svg'}
+                                    <img src={service.image ? `${service.image}` : '/images/microsoft-docs.svg'}
                                         alt={`Microsoft Docs for ${service.name}`} className="microsoft-image" />
                                 </span>
                                 <span className="docs-learn-title">{service.name} Docs</span>

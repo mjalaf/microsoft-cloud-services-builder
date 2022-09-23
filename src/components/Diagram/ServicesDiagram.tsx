@@ -74,6 +74,7 @@ export default function ServicesDiagram(){
     function onLoad(_reactFlowInstance: any) {
         setReactFlowInstance(_reactFlowInstance);
         _reactFlowInstance.fitView();
+     
     }
 
     const onElementsRemove = (elementsToRemove: Elements) => setElements((els) => removeElements(elementsToRemove, els));
@@ -87,8 +88,13 @@ export default function ServicesDiagram(){
         event.dataTransfer.dropEffect = 'move';
     }
    
+    function onDropArchitecture(event: React.DragEvent){
+
+    }
+
     function onDrop(event: React.DragEvent){
         const data = event.dataTransfer.getData('application/reactflow');
+
         if (data) {
             const service: IService = JSON.parse(data);
 

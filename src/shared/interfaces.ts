@@ -1,13 +1,19 @@
 export interface IServiceCategory {
+    svcCat: () => Promise<IService[]>;
+    id: string;
     name: string;
     serviceNames: string[];
     cssClass: string;
     services: IService[];
+    scenenarios: IService[];
+    architectures: IServiceArchitecture[];
 }
 
 export interface IService {
+    id: string;
     name: string;
     description: string;
+    parent: string;
     image: string;
     cssClass: string;
     category: string;
@@ -15,6 +21,25 @@ export interface IService {
     azureCLICommand: string[];
     documents: IDocument[];
     learnContent: ILearnContent[]
+}
+
+export interface IServiceScenario {
+    id: string;
+    name: string;
+}
+
+export interface IServiceArchitecture {
+    id: string;
+    name: string;
+    description: string;
+    relatedServices: string[];
+    image: string;
+    components: IComponent[];
+}
+
+export interface IComponent {
+    id: string;
+    name: string;
 }
 
 export interface IDocument {
@@ -39,4 +64,4 @@ export interface ICloudBlockData {
 
 export type LearnType = 'path' | 'module';
 
-export type ServiceCategoryType = 'categories' | 'scenarios';
+export type ServiceCategoryType = 'categories' | 'scenarios' | 'architecture';

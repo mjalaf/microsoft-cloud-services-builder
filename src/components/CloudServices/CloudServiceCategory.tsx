@@ -8,7 +8,7 @@ export default function CloudServiceCategory(props: { serviceCategory: IServiceC
     
     return (
         <div key={serviceCategory.name} 
-            className={`${serviceCategory.cssClass} service-picker-item service-picker-item-size cursor-pointer`}
+            className={`${serviceCategory.cssClass !== undefined ? serviceCategory.cssClass   : "bg-gn"  } service-picker-item service-picker-item-size cursor-pointer`}
             onClick={(event) => filterCategories(event, serviceCategory)}
         >
             <CloudBlock name={serviceCategory.name} />                

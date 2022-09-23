@@ -5,7 +5,7 @@ export async function getAllProductsfromCosmosDb() : Promise<IProduct[]>
 {
     const { container }  = await getCosmosDBContainer();
 
-    const { resources } = await  container.items.query("SELECT c.id,c.name, c.description,c.documents,c.link, c.image, c.azureCLICommand, c.learnContent, c.relatedServices  from c WHERE c.partitionKey = 'AzureResource'")
+    const { resources } = await  container.items.query("SELECT c.id,c.name, c.parent, c.description,c.documents,c.link, c.image, c.azureCLICommand, c.learnContent, c.relatedServices  from c WHERE c.partitionKey = 'AzureResource'")
         .fetchAll();
 
     return resources;
@@ -17,7 +17,7 @@ export async function getProductsByProdCategoryIdfromCosmosDb(prodCategoryID :St
 
     const { resources } =  await container.items
             .query({
-                query: "SELECT c.id,c.name, c.description,c.documents,c.link, c.image, c.azureCLICommand, c.learnContent, c.relatedServices  from c WHERE c.partitionKey = 'AzureResource' AND c.parent = @parent",
+                query: "SELECT c.id,c.name, c.parent, c.description,c.documents,c.link, c.image, c.azureCLICommand, c.learnContent, c.relatedServices  from c WHERE c.partitionKey = 'AzureResource' AND c.parent = @parent",
                 parameters: [{ name: "@parent", value: prodCategoryID }]
             })
             .fetchAll();
@@ -31,7 +31,7 @@ export async function getProductsByIdfromCosmosDb(productID :String) : Promise<I
 
     const { resources } =   await container.items
     .query({
-        query: "SELECT c.id, c.name,c.description,c.documents,c.link, c.image, c.azureCLICommand, c.learnContent, c.relatedServices  from c WHERE c.partitionKey = 'AzureResource' AND c.id = @id",
+        query: "SELECT c.id, c.name, c.parent, c.description,c.documents,c.link, c.image, c.azureCLICommand, c.learnContent, c.relatedServices  from c WHERE c.partitionKey = 'AzureResource' AND c.id = @id",
         parameters: [{ name: "@id", value: productID }]
     })
     .fetchAll();
