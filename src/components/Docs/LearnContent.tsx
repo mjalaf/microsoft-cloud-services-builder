@@ -1,24 +1,24 @@
 import React from 'react';
-import { IDocument, ILearnContent, IService } from 'shared/interfaces';
+import { IDocument, ILearnContent, ISectionBase } from 'shared/interfaces';
 
-export default function LearnContent(props: { selectedServices: IService[] }) {
-    const { selectedServices } = props;
+export default function LearnContent(props: { selectedSectionContents: ISectionBase[] }) {
+    const { selectedSectionContents } = props;
 
     return (
         <>
-            {selectedServices.length > 0 && selectedServices.map((service: IService) => (
-                <div key={service.name}>
-                    {service.learnContent && (
+            {selectedSectionContents.length > 0 && selectedSectionContents.map((content: ISectionBase) => (
+                <div key={content.name}>
+                    {content.learnContent && (
                         <div className="list">
                             <div className="image-title-container mb-10 bg-light-gray">
                                 <span className="bg-main">
-                                    <img src={service.image ? `${service.image}` : '/images/microsoft-docs.svg'}
-                                        alt={`Microsoft Docs for ${service.name}`} className="microsoft-image" />
+                                    <img src={content.image ? `${content.image}` : '/images/microsoft-docs.svg'}
+                                        alt={`Microsoft Docs for ${content.name}`} className="microsoft-image" />
                                 </span>
-                                <span className="docs-learn-title">{service.name}</span>
+                                <span className="docs-learn-title">{content.name}</span>
                             </div>
                             <ul>
-                                {service.learnContent && service.learnContent.map((learnContent: ILearnContent) => (
+                                {content.learnContent && content.learnContent.map((learnContent: ILearnContent) => (
                                     <li key={learnContent.name}>
                                         <div className="image-title-container mb-10">
                                             <img src={learnContent.image ? learnContent.image : 'https://docs.microsoft.com/learn/achievements/generic-trophy.svg'}
@@ -44,7 +44,7 @@ export default function LearnContent(props: { selectedServices: IService[] }) {
                     )}
                 </div>
             ))}
-            {!selectedServices.length && (
+            {!selectedSectionContents.length && (
                 <div>No services selected</div>
             )}
         </>

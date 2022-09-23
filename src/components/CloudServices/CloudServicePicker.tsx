@@ -1,131 +1,110 @@
 import React, { useEffect, useState } from 'react';
 import axios from 'axios';
-import { IService, IServiceCategory, IServiceScenario, ServiceCategoryType, IServiceArchitecture } from 'shared/interfaces';
+import { IComponent, ISectionCategory, SectionCategoryType } from 'shared/interfaces';
 import ArrowBackIcon from '@mui/icons-material/ArrowBack';
 import CloudService from './CloudService';
-import CloudServiceCategory from './CloudServiceCategory';
-import CloudArchitecture from './CloudArchitecture';
+import CloudSectionCategory from './CloudSectionCategory'
 
-export default function CloudServicePicker(props: { categoryType: ServiceCategoryType}) {
-    const {categoryType} = props;
+export default function CloudServicePicker(props: { sectionType: SectionCategoryType}) {
+    const {sectionType} = props;
 
-    const [serviceCategories, setServiceCategories] = useState<IServiceCategory[]>([]);
-    const [services, setServices] = useState<IService[]>([]);
-    const [serviceCategory, setServiceCategory] = useState<IServiceCategory | null>();
-
+    const [sectionCategories, setSectionCategories] = useState<ISectionCategory[]>([]);
+    const [components, setComponents] = useState<IComponent[]>([]);
+    const [sectionCategory, setSectionCategory] = useState<ISectionCategory | null>();
 
     useEffect(() => {
         const getData = async () => {
-            if (categoryType === 'categories') {
+            if (sectionType === 'categories') {
                 console.log("load categories");
                 const svcCatsResponse = await axios.get('https://func-service-builder.azurewebsites.net/api/productcategory/?code=4FeWfIOqXlImp9OJisvbcQHBM92fRdVvlK3fiBt0oMFNAzFu6D8BvQ==');
             
-                const svcCats: IServiceCategory[] = svcCatsResponse.data;
-                setServiceCategories(svcCats);
+                const svcCats: ISectionCategory[] = svcCatsResponse.data;
+                setSectionCategories(svcCats);
             }
 
-            if (categoryType === 'scenarios') {
+            if (sectionType === 'scenarios') {
                 const svcsScenariosResponse = await axios.get('/data/serviceScenarios.json');
-                const svcsScenarios: IServiceCategory[] = svcsScenariosResponse.data;
-                setServiceCategories(svcsScenarios);
+                const svcsScenarios: ISectionCategory[] = svcsScenariosResponse.data;
+                setSectionCategories(svcsScenarios);
             }
 
-            if (categoryType === 'architecture') {
+            if (sectionType === 'architecture') {
                 const svcsArchitectureResponse = await axios.get('/data/serviceArchitectures.json');
-                const svcsAchitecture: IServiceCategory[] = svcsArchitectureResponse.data;
-                setServiceCategories(svcsAchitecture);
+                const svcsAchitecture: ISectionCategory[] = svcsArchitectureResponse.data;
+                setSectionCategories(svcsAchitecture);
             }
-
 
             const svcsResponse = await axios.get('https://func-service-builder.azurewebsites.net/api/products/?code=Y-BcpwJb4RhHCEj16PgVo2A9YQbb9S1Lh-jfo1t4WTWQAzFujgqchA==');
-            const svcs: IService[] = svcsResponse.data;
-            setServices(svcs);
+            const svcs: IComponent[] = svcsResponse.data;
+            setComponents(svcs);
         };
 
         getData();
     }, []);
 
 
-    function filterCategories(event: React.MouseEvent<HTMLDivElement, MouseEvent>, svcCat: IServiceCategory) {
-        setServiceCategory(svcCat);
+    function filterCategories(event: React.MouseEvent<HTMLDivElement, MouseEvent>, svcCat: ISectionCategory) {
+        setSectionCategory(svcCat);
     }
 
-    function getServicesSecenario(svcCat: IServiceCategory) {
-        const scenario : IServiceScenario[] = svcCat.scenenarios;
-
-        svcCat.services = [];
+    function getServicesSecenario(svcCat: ISectionCategory) {
+        const scenario : IComponent[] = svcCat.components;
+        let newComps : IComponent[] = new Array();
+        
         for (const item of scenario) {
-            const svcs = services.filter(svc => svc.id === item.id);
-            svcCat.services.push(...svcs);
+
+            const svcs = components.filter(svc => svc.id === item.id);
+            newComps.push(...svcs);
         }
+        svcCat.components =newComps;
         return svcCat;
     }
-       /* 
-    function getArchitectureSecenario(svcCat: IServiceCategory) {
-        const architecture : IServiceArchitecture[] = svcCat.architectures;
-
-        svcCat.services = [];
-        for (const item of architecture) {
-    //        const svcs = services.filter(svc => svc.id === item.id);
-           // svcCat.services.push(item);
-        }
-        return svcCat;
-    }*/
-       
-
-    function getServicesByCategoryType(svcCat: IServiceCategory) {
+    
+    function getServicesByCategoryType(svcCat: ISectionCategory) {
 
     //    const serviceNames = svcCat.serviceNames;
-        if (categoryType === 'categories') {
-            svcCat.services =  services.filter(svc => svc.parent === svcCat.id);
+        if (sectionType === 'categories') {
+            svcCat.components =  components.filter(svc => svc.parent === svcCat.id);
             return svcCat;
         }
         
-        if (categoryType === 'scenarios') {
+        if (sectionType === 'scenarios') {
             return getServicesSecenario(svcCat);
         }
-/*
-        if (categoryType === 'architecture') {
-            return getArchitectureSecenario(svcCat);
+
+        if (sectionType === 'architecture') {
+            return svcCat;
         }
-        */
+        
     }
 
 
     //eslint-disable-next-line
     function goBack(event: React.MouseEvent<HTMLDivElement, MouseEvent>) {
-            setServiceCategory(null);
+            setSectionCategory(null);
         }
 
     return (
         <>
-            {serviceCategory && (
+            {sectionCategory && (
                 <div onClick={(event) => goBack(event)} className="back-button-container">
                     <ArrowBackIcon className="back-button" />
                 </div>
             )}
             <div className="service-picker">
-                {!serviceCategory && serviceCategories.map(svcCat => (
-                    <CloudServiceCategory key={svcCat.name}
-                        serviceCategory={svcCat}
+                {!sectionCategory && sectionCategories.map(svcCat => (
+                    <CloudSectionCategory key={svcCat.name}
+                        sectionCategory={svcCat}
                         filterCategories={filterCategories} />
                 ))}
 
-                { categoryType !== 'architecture' && serviceCategory && (getServicesByCategoryType(serviceCategory))?.services.map((service: IService) => (
-                    <CloudService key={service.name}
-                        serviceCategory={serviceCategory}
-                        service={service}
+                { sectionCategory && (getServicesByCategoryType(sectionCategory))?.components.map((comp: IComponent) => (
+                    <CloudService key={comp.name}
+                        sectionCategory={sectionCategory}
+                        section={comp}
                     />
                 ))
-                 
                 } 
-                 
-                { categoryType === 'architecture' && serviceCategory && serviceCategory.architectures.map((arch: IServiceArchitecture) => (
-                    <CloudArchitecture key={arch.name}
-                        serviceCategory={serviceCategory}
-                        architecture={arch}
-                    />
-                ))}
 
             </div>
         </>

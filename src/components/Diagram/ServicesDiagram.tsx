@@ -19,7 +19,7 @@ import ReactFlow, {
 import FloatingEdge from './FloatingEdge';
 import FloatingConnectionLine from './FloatingConnectionLine';
 import { createElements } from './diagramUtils';
-import { IService } from 'shared/interfaces';
+import { IComponent } from 'shared/interfaces';
 import CloudBlock from 'components/CloudServices/CloudBlock';
 import { servicesAtom } from 'atoms/servicesAtom';
 import { useSetRecoilState } from 'recoil';
@@ -36,7 +36,7 @@ export default function ServicesDiagram(){
     const [reactFlowInstance, setReactFlowInstance] = useState<any>(null);
     const [elements, setElements] = useState<Elements>(initialElements);
     // useRef needed since using useState() creates stale closure issue due to keydown binding
-    const services = useRef<IService[]>([]);
+    const services = useRef<IComponent[]>([]);
     const selectedElement = useRef<Node | Edge>();
     const setServices = useSetRecoilState(servicesAtom);
 
@@ -88,15 +88,11 @@ export default function ServicesDiagram(){
         event.dataTransfer.dropEffect = 'move';
     }
    
-    function onDropArchitecture(event: React.DragEvent){
-
-    }
-
     function onDrop(event: React.DragEvent){
         const data = event.dataTransfer.getData('application/reactflow');
 
         if (data) {
-            const service: IService = JSON.parse(data);
+            const service: IComponent = JSON.parse(data);
 
             // Make sure they haven't already added the service
             if (services.current.findIndex(svc => svc.name === service.name) > -1) {

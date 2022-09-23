@@ -1,30 +1,30 @@
 import React from 'react';
-import { IService } from 'shared/interfaces';
+import { ISectionBase } from 'shared/interfaces';
 
-export default function CLIContent(props: {selectedServices: IService[]}) {
-    const { selectedServices } = props;
+export default function CLIContent(props: {selectedSectionContents: ISectionBase[]}) {
+    const { selectedSectionContents } = props;
 
     return (
         <>
-            {selectedServices.length > 0 && (
+            {selectedSectionContents.length > 0 && (
                 <pre className="console">
-                    {selectedServices.map((service: IService) => (
-                        <div key={service.name}>
-                            {service.azureCLICommand && (
+                    {selectedSectionContents.map((content: ISectionBase) => (
+                        <div key={content.name}>
+                            {content.azureCLICommand && (
                                 <div className="azure-cli-command">
-                                    <span className="comment"># {service.name}</span>
+                                    <span className="comment"># {content.name}</span>
                                     <br />
-                                    {service.azureCLICommand.join('\n')}
+                                    {content.azureCLICommand.join('\n')}
                                 </div>
                             )}
-                            {!service.azureCLICommand && (
+                            {!content.azureCLICommand && (
                                 <span className="comment"></span>
                             )}
                         </div>
                     ))}
                 </pre>
             )}
-            {!selectedServices.length && (
+            {!selectedSectionContents.length && (
                 <div>No services selected</div>
             )}
         </>

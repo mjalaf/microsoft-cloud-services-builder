@@ -2,7 +2,7 @@
   {
     "name": "Build an API",
     "cssClass": "bg-int",
-    "scenenarios": [
+    "components": [
       {
         "id": "AZPROD-20-2",
         "name": "App Service"        
@@ -20,7 +20,7 @@
   {
     "name": "Build a Web App",
     "cssClass": "bg-web",
-    "scenenarios": [
+    "components": [
      {
         "id": "AZPROD-20-2",
         "name": "App Service"        
@@ -42,7 +42,7 @@
   {
     "name": "Use Containers",
     "cssClass": "bg-cmp",
-    "scenenarios": [
+    "components": [
     {
         "id": "AZPROD-20-2",
         "name": "App Service"        
@@ -68,7 +68,7 @@
   {
     "name": "Integrate Microsoft 365 Data",
     "cssClass": "bg-365",
-    "scenenarios": [
+    "components": [
       {
         "id": "AZPROD-7-0",
         "name": "Azure Active Directory"        

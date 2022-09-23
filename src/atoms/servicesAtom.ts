@@ -1,9 +1,9 @@
 import { atom, RecoilState } from 'recoil';
-import { IService } from '../shared/interfaces';
+import { ISectionBase } from '../shared/interfaces';
 
-const initialState: IService[] = [];
+const initialState: ISectionBase[] = [];
 
-export const servicesAtom: RecoilState<IService[]> = atom({
+export const servicesAtom: RecoilState<ISectionBase[]> = atom({
     key: 'servicesAtom', 
     default: initialState
 });

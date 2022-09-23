@@ -3,7 +3,7 @@ import { Box, Tab, Tabs } from '@mui/material';
 import { useRecoilValue } from 'recoil';
 
 import { servicesAtom } from 'atoms/servicesAtom';
-import { IService } from 'shared/interfaces';
+import { ISectionBase } from 'shared/interfaces';
 import TabPanel from 'shared/TabPanel';
 import DocsContent from './DocsContent';
 import LearnContent from './LearnContent';
@@ -11,7 +11,7 @@ import CLIContent from './CLIContent';
 
 export default function DocumentList() {
     const [value, setValue] = useState(0);
-    const selectedServices = useRecoilValue<IService[]>(servicesAtom);
+    const selectedContents = useRecoilValue<ISectionBase[]>(servicesAtom);
 
     function handleChange(event: React.SyntheticEvent, newValue: number) {
         setValue(newValue);
@@ -29,13 +29,13 @@ export default function DocumentList() {
                     </Tabs>
                 </Box>
                 <TabPanel value={value} index={0}>
-                    <DocsContent selectedServices={selectedServices} />
+                    <DocsContent selectedSectionContents={selectedContents} />
                 </TabPanel>
                 <TabPanel value={value} index={1}>
-                    <LearnContent selectedServices={selectedServices} />
+                    <LearnContent selectedSectionContents={selectedContents} />
                 </TabPanel>
                 <TabPanel value={value} index={2}>
-                    <CLIContent selectedServices={selectedServices} />
+                    <CLIContent selectedSectionContents={selectedContents} />
                 </TabPanel>
             </div>
         </>

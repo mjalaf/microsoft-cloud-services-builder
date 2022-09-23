@@ -2,11 +2,11 @@
   {
     "name": "Distributed",
     "cssClass": "bg-int",
-    "architectures": [
+    "components": [
       {
         "id": "ARCH-GEN",
         "name": "Hybrid geo-distributed",
-        
+
         "components":  [ {
           "id": "AZPROD-20-2",
           "name": "App Service"        
@@ -29,7 +29,7 @@
   {
     "name": "Web Farm",
     "cssClass": "bg-web",
-    "architectures": [
+    "components": [
      {
         "id": "ARCH-GEN",
         "name": "Single Server"        

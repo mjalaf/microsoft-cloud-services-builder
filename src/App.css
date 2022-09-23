@@ -46,7 +46,7 @@ main {
 }
 
 div[role=tabpanel] {
-  min-height: 300px;
+  min-height:360px;
 }
 
 .back-button-container {

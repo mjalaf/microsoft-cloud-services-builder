@@ -63,13 +63,13 @@ function App() {
                             </Tabs>
                         </Box>
                         <TabPanel value={value} index={0}>
-                            <CloudServicePicker categoryType="categories" />
+                            <CloudServicePicker sectionType="categories" />
                         </TabPanel>
                         <TabPanel value={value} index={1}>
-                            <CloudServicePicker categoryType="scenarios" />
+                            <CloudServicePicker sectionType="scenarios" />
                         </TabPanel>
                         <TabPanel value={value} index={2}>
-                            <CloudServicePicker categoryType="architecture" />
+                            <CloudServicePicker sectionType="architecture" />
                         </TabPanel>
                     </div>
                     <div className="app-bottom-row">

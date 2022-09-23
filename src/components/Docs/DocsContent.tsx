@@ -1,24 +1,24 @@
 import React from 'react';
-import { IDocument, IService } from 'shared/interfaces';
+import { IDocument, ISectionBase } from 'shared/interfaces';
 
-export default function DocsContent(props: {selectedServices: IService[]}) {
-    const { selectedServices } = props;
+export default function DocsContent(props: {selectedSectionContents: ISectionBase[]}) {
+    const { selectedSectionContents } = props;
     
     return (
         <>
-            {selectedServices.length > 0 && selectedServices.map((service: IService) => (
-                <div key={service.name} className="list">
-                    {service.documents && (
+            {selectedSectionContents.length > 0 && selectedSectionContents.map((content: ISectionBase) => (
+                <div key={content.name} className="list">
+                    {content.documents && (
                         <div>
                             <div className="image-title-container mb-10 bg-light-gray">
                                 <span className="bg-main">
-                                    <img src={service.image ? `${service.image}` : '/images/microsoft-docs.svg'}
-                                        alt={`Microsoft Docs for ${service.name}`} className="microsoft-image" />
+                                    <img src={content.image ? `${content.image}` : '/images/microsoft-docs.svg'}
+                                        alt={`Microsoft Docs for ${content.name}`} className="microsoft-image" />
                                 </span>
-                                <span className="docs-learn-title">{service.name} Docs</span>
+                                <span className="docs-learn-title">{content.name} Docs</span>
                             </div>
                             <ul>
-                                {service.documents && service.documents.length > 0 && service.documents.map((document: IDocument) => (
+                                {content.documents && content.documents.length > 0 && content.documents.map((document: IDocument) => (
                                     <li key={document.name}>
                                         <a href={document.url} target="_blank" rel="noopener noreferrer">{document.name}</a>
                                     </li>
@@ -29,7 +29,7 @@ export default function DocsContent(props: {selectedServices: IService[]}) {
                     )}
                 </div>
             ))}
-            {!selectedServices.length && (
+            {!selectedSectionContents.length && (
                 <div>No services selected</div>
             )}
         </>

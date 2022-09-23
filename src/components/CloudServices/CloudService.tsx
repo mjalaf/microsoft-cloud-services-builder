@@ -3,18 +3,18 @@ import { styled } from '@mui/material/styles';
 import Tooltip, { TooltipProps, tooltipClasses } from '@mui/material/Tooltip';
 import Typography from '@mui/material/Typography';
 
-import { IService, IServiceCategory } from 'shared/interfaces';
+import { ISectionBase, ISectionCategory } from 'shared/interfaces';
 import CloudBlock from './CloudBlock';
 import { JsxElement } from 'typescript';
 
-export default  function CloudService(props: { serviceCategory: IServiceCategory, service: IService  })   {
-    const {serviceCategory, service} = props;
+export default  function CloudService(props: { sectionCategory: ISectionCategory, section: ISectionBase  })   {
+    const {sectionCategory, section} = props;
 
-    function onDragStart(event: React.DragEvent, service: IService) {
+    function onDragStart(event: React.DragEvent, service: ISectionBase) {
         const dragData = { 
             ...service, 
-            category: serviceCategory.name,
-            cssClass: serviceCategory.cssClass 
+            category: sectionCategory.name,
+            cssClass: sectionCategory.cssClass 
         };
         if (event.dataTransfer) {
             event.dataTransfer.setData('application/reactflow', JSON.stringify(dragData));
@@ -38,22 +38,20 @@ export default  function CloudService(props: { serviceCategory: IServiceCategory
         <HtmlTooltip
             title={
                 <>
-                    <Typography color="inherit">{service.name}</Typography>
-                    <div className="tooltip-description">{service.description}</div>
-                    {service.relatedServices && (
-                        <div className="tooltip-related-services">Related services: {service.relatedServices.join(', ')}</div>
-                    )}
+                    <Typography color="inherit">{section.name}</Typography>
+                    <div className="tooltip-description">{section.description}</div>
+                    
                 </>
             }
         >
-            <div key={service.name} 
-                className={`${serviceCategory.cssClass !== undefined ? serviceCategory.cssClass : "bg-gn"} service-picker-item service-picker-item-size cursor-drag-drop`}
-                onDragStart={(event) => onDragStart(event, service)} draggable
+            <div key={section.name} 
+                className={`${sectionCategory.cssClass !== undefined ? sectionCategory.cssClass : "bg-gn"} service-picker-item service-picker-item-size cursor-drag-drop`}
+                onDragStart={(event) => onDragStart(event, section)} draggable
             >
-                <CloudBlock name={service.name} 
-                    description={service.description} 
-                    image={service.image} 
-                    cssClass={serviceCategory.cssClass}
+                <CloudBlock name={section.name} 
+                    description={section.description} 
+                    image={section.image} 
+                    cssClass={section.cssClass}
                 />
             </div>
         </HtmlTooltip>
