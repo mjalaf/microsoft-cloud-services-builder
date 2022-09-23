@@ -13,16 +13,18 @@ import ReactFlow, {
     FlowElement,
     Position,
     isEdge,
-    getConnectedEdges
+    getConnectedEdges,
+    XYPosition
 } from 'react-flow-renderer';
 
 import FloatingEdge from './FloatingEdge';
 import FloatingConnectionLine from './FloatingConnectionLine';
 import { createElements } from './diagramUtils';
-import { IComponent } from 'shared/interfaces';
+import { IComponent, ISectionBase } from 'shared/interfaces';
 import CloudBlock from 'components/CloudServices/CloudBlock';
 import { servicesAtom } from 'atoms/servicesAtom';
 import { useSetRecoilState } from 'recoil';
+
 
 const initialElements: Elements = createElements();
 
@@ -36,7 +38,7 @@ export default function ServicesDiagram(){
     const [reactFlowInstance, setReactFlowInstance] = useState<any>(null);
     const [elements, setElements] = useState<Elements>(initialElements);
     // useRef needed since using useState() creates stale closure issue due to keydown binding
-    const services = useRef<IComponent[]>([]);
+    const services = useRef<ISectionBase[]>([]);
     const selectedElement = useRef<Node | Edge>();
     const setServices = useSetRecoilState(servicesAtom);
 
@@ -88,12 +90,69 @@ export default function ServicesDiagram(){
         event.dataTransfer.dropEffect = 'move';
     }
    
+    function drawDefinedDiagrams(component: IComponent)
+    {
+        
+        let i =0;
+        let currentPosition : XYPosition = { x: 5, y: 5};
+        for (const comp of component.childs)
+        {
+            i++;
+           // Make sure they haven't already added the service
+        if (services.current.findIndex(svc => svc.name === comp.name) > -1) {
+            return;
+        }
+
+        services.current = services.current.concat(comp);
+        setServices(services.current);
+
+        const reactFlowBounds = reactFlowWrapper.current?.getBoundingClientRect() as DOMRect;
+
+        calculatePosition(i,currentPosition);
+
+        const newNode: FlowElement = {
+            id: comp.name,
+            position:   { x: currentPosition.x, y: currentPosition.y } ,
+            className: comp.cssClass,
+            sourcePosition: Position.Left,
+            targetPosition: Position.Right,
+            data: { 
+                label: <CloudBlock name={comp.name} 
+                    description={comp.description} 
+                    image={comp.image} 
+                    showDeleteButton={true} 
+                    deleteService={deleteSelectedElement} /> 
+            }
+        };
+    
+        setElements((es) => es.concat(newNode));
+     }
+    }
+
+    
+    function calculatePosition(i: number, position : XYPosition) : XYPosition
+    {
+        if (i === 1)
+           return position;
+     
+         position.x = position.x + 200; 
+     
+         if (i % 3 === 0  )
+         {  
+            position.x = 5; 
+            position.y = position.y + 25 * 3; 
+         }
+        return position;
+            
+    }
+
     function onDrop(event: React.DragEvent){
         const data = event.dataTransfer.getData('application/reactflow');
 
         if (data) {
             const service: IComponent = JSON.parse(data);
 
+            if (service.childs == undefined || service.childs.length == 0){
             // Make sure they haven't already added the service
             if (services.current.findIndex(svc => svc.name === service.name) > -1) {
                 return;
@@ -126,6 +185,9 @@ export default function ServicesDiagram(){
       
             setElements((es) => es.concat(newNode));
             event.preventDefault();
+            }
+            else
+            drawDefinedDiagrams(service);
         }
     }
 
@@ -151,6 +213,7 @@ export default function ServicesDiagram(){
                     zoomOnScroll={false}
                 >
                     {/* <Background size={0.5} /> */}
+                    
                 </ReactFlow>
             </div>
         </>

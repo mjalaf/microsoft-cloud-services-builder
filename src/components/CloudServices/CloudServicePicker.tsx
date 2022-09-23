@@ -59,6 +59,26 @@ export default function CloudServicePicker(props: { sectionType: SectionCategory
         svcCat.components =newComps;
         return svcCat;
     }
+    function getArchitectureSecenario(svcCat: ISectionCategory) {
+        const architecture : IComponent[] = svcCat.components;
+
+        for (const current of architecture) {
+    
+            if (current.childs !== undefined && current.childs.length > 0)
+                for (let index = 0; index < current.childs.length; index++) {
+                    const currentItem = current.childs[index];
+                    const svcs : IComponent | undefined = components.find(svc => svc.id === currentItem.id) ;
+                    current.childs[index].cssClass = svcs?.cssClass;  
+                    current.childs[index].description = svcs?.description;  
+                    current.childs[index].image = svcs?.image;  
+                    current.childs[index].documents = svcs?.documents;
+                    current.childs[index].learnContent = svcs?.learnContent;
+                
+                }
+        }
+     
+        return svcCat;
+    }
     
     function getServicesByCategoryType(svcCat: ISectionCategory) {
 
@@ -73,7 +93,7 @@ export default function CloudServicePicker(props: { sectionType: SectionCategory
         }
 
         if (sectionType === 'architecture') {
-            return svcCat;
+            return getArchitectureSecenario(svcCat);
         }
         
     }

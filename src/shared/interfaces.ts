@@ -13,20 +13,26 @@ export interface ISectionCategory extends ICategory {
 export interface ISectionBase {
     id: string;
     name: string;
-    description: string;
-    cssClass: string;
-    image: string;
+    description?: string;
+    cssClass?: string;
+    image?: string;
     parent: string;
-    azureCLICommand: string[];
-    documents: IDocument[];
-    learnContent: ILearnContent[]
+    azureCLICommand?: string[];
+    documents?: IDocument[];
+    learnContent?: ILearnContent[];
 }
 
 export interface IComponent extends ISectionBase
 {
-    
+    childs : IChildComponent[];
 
 }
+
+export interface IChildComponent extends ISectionBase
+{
+
+}
+
 /*
 export interface IScenario extends ISectionBase
 {

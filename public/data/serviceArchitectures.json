@@ -1,47 +1,154 @@
 [
-  {
-    "name": "Distributed",
-    "cssClass": "bg-int",
-    "components": [
-      {
-        "id": "ARCH-GEN",
-        "name": "Hybrid geo-distributed",
-
-        "components":  [ {
-          "id": "AZPROD-20-2",
-          "name": "App Service"        
-       },
-       {
-        "id": "AZPROD-10-21",
-        "name": "Azure Functions"    
-       },
-       {
-         "id": "AZPROD-10-0",
-         "name": "API Management"       
-       }        
-    ]},
-     {
-      "id": "ARCH-GEN",
-      "name": "Hybrid relay connection in Azure and Azure Stack Hub"    
-     }
-    ]
-  },
-  {
-    "name": "Web Farm",
-    "cssClass": "bg-web",
-    "components": [
-     {
-        "id": "ARCH-GEN",
-        "name": "Single Server"        
-     },
-     {
-      "id": "ARCH-GEN",
-      "name": "Multi Server"        
-     },
-     {
-      "id": "ARCH-GEN",
-      "name": "Geo Redundant"        
-     }
-    ]
-  }
+	{
+		"name": "Web",
+		"cssClass": "bg-web",
+		"components": [
+			{
+				"id": "ARCH-GEN-1",
+				"name": "Basic web application",
+        "link":"https://learn.microsoft.com/en-us/azure/architecture/reference-architectures/app-service-web-app/basic-web-app?tabs=cli",
+				"childs": [
+					{
+						"id": "AZPROD-20-2",
+						"name": "App Service"
+					},
+					{
+						"id": "AZPROD-16-3",
+						"name": "Azure DNS"
+					},
+					{
+						"id": "AZPROD-4-8",
+						"name": "SQL DataBase"
+					},
+					{
+						"id": "AZPROD-7-0",
+						"name": "Azure Active Directory (Azure AD)"
+					},
+          {
+						"id": "AZPROD-6-4",
+						"name": "Azure Monitor"
+					},
+          {
+						"id": "AZPROD-17-14",
+						"name": "Key Vault"
+					}
+                    
+				]
+			},
+			{
+				"id": "ARCH-GEN-2",
+				"name": "Multi-region web app with private connectivity to a database",
+        "link":"https://learn.microsoft.com/en-us/azure/architecture/example-scenario/sql-failover/app-service-private-sql-multi-region",
+				"childs": [
+					{
+						"id": "AZPROD-20-2",
+						"name": "App Service"
+					},
+          {
+						"id": "AZPROD-16-14",
+						"name": "Virtual Network"
+					},
+					{
+						"id": "AZPROD-16-3",
+						"name": "Azure DNS"
+					},
+          {
+						"id": "AZPROD-16-10",
+						"name": "Azure Private Link"
+					},
+					{
+						"id": "AZPROD-4-8",
+						"name": "SQL DataBase"
+					},
+					{
+						"id": "AZPROD-16-8",
+						"name": "Azure Front Door"
+					}        
+				]
+			}
+		]
+	},
+	{
+		"name": "Infrastructure",
+		"cssClass": "bg-int",
+		"components": [
+			{
+				"id": "ARCH-GEN-3",
+				"name": "3D video rendering",
+        "link":"https://learn.microsoft.com/en-us/azure/architecture/example-scenario/infrastructure/video-rendering",
+				"childs": [
+          {
+						"id": "AZPROD-16-14",
+						"name": "Virtual Network"
+					},
+					{
+						"id": "AZPROD-2-11",
+						"name": "Virtual Machine Scale Sets"
+					},
+          {
+						"id": "AZPROD-18-13",
+						"name": "Storage Accounts"
+					}       
+				]
+			},
+			{
+				"id": "ARCH-GEN-4",
+				"name": "HPC cluster deployed in the cloud",
+        "link":"https://learn.microsoft.com/en-us/azure/architecture/solution-ideas/articles/hpc-cluster",
+				"childs": [
+					{
+						"id": "AZPROD-5-3",
+						"name": "Azure Pipelines"
+					},
+          {
+						"id": "AZPROD-16-14",
+						"name": "Virtual Network"
+					},
+					{
+						"id": "AZPROD-18-2",
+						"name": "Azure Backup"
+					},
+          {
+						"id": "AZPROD-2-12",
+						"name": "Virtual Machines"
+					},
+          {
+						"id": "AZPROD-6-4",
+						"name": "Azure Monitor"
+					}
+				]
+  			},
+			{
+				"id": "ARCH-GEN-5",
+				"name": "Run CFD simulations",
+        "link":"https://learn.microsoft.com/en-us/azure/architecture/example-scenario/infrastructure/hpc-cfd",
+				"childs": [
+					{
+						"id": "AZPROD-2-1",
+						"name": "Azure CycleCloud"
+					},
+          {
+						"id": "AZPROD-18-1",
+						"name": "Avere vFXT for Azure"
+					},
+          {
+						"id": "AZPROD-2-12",
+						"name": "Virtual Machines"
+					},
+          {
+						"id": "AZPROD-2-11",
+						"name": "Virtual Machine Scale Sets"
+					},
+          {
+						"id": "AZPROD-18-13",
+						"name": "Storage Accounts"
+					},    
+          {
+						"id": "AZPROD-16-14",
+						"name": "Virtual Network"
+					} 
+				]
+			}
+		]
+	}
 ]
