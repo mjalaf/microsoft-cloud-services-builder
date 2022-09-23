@@ -73,7 +73,7 @@ export default function CloudServicePicker(props: { sectionType: SectionCategory
                     current.childs[index].image = svcs?.image;  
                     current.childs[index].documents = svcs?.documents;
                     current.childs[index].learnContent = svcs?.learnContent;
-                
+                    current.childs[index].azureCLICommand = svcs?.azureCLICommand;
                 }
         }
      
