@@ -6,14 +6,18 @@ const httpTrigger: AzureFunction = async function (context: Context, req: HttpRe
     context.log('HTTP trigger function processed a request.');
     //const name = (req.query.name || (req.body && req.body.name));
     try {
-        let producs : IProduct[] = await processProductRequest(req.query);
+        let products : IProduct[] = await processProductRequest(req.query);
     
+       
+
         context.res = {
             headers: {
                 "Content-Type": "application/json",
             },
-            body: producs 
+            
+            body: (products.length === 1  ? products[0] :products )
         };
+        
     } catch (error) {
         
         context.res = {
