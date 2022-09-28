@@ -9,7 +9,7 @@ const Category =  (props) => {
     const params = useParams();
     
     const getCategory = id => {
-        ApiService.get(id)
+        ApiService.getProductCategoryById(id)
           .then(response => {
             setCurrentCategory(response.data);
             console.log(response.data);
@@ -38,7 +38,7 @@ const Category =  (props) => {
           published: status
         };
     
-        ApiService.update(category.id, data)
+        ApiService.postProductCategory(data)
           .then(response => {
             setCurrentCategory({ ...currentCategory, published: status });
             console.log(response.data);
@@ -52,7 +52,7 @@ const Category =  (props) => {
       const updateCategory = () => {
         var category = currentCategory !== undefined ? currentCategory : {};
 
-        ApiService.update(category.id, currentCategory)
+        ApiService.postProductCategory(currentCategory)
           .then(response => {
             console.log(response.data);
             setMessage("The Category was updated successfully!");
@@ -64,7 +64,7 @@ const Category =  (props) => {
     
       const deleteCategory = () => {
         var category = currentCategory !== undefined ? currentCategory : {};
-
+/*
         ApiService.remove(category.id)
           .then(response => {
             console.log(response.data);
@@ -73,7 +73,8 @@ const Category =  (props) => {
           .catch(e => {
             console.log(e);
           });
-      };
+  */
+        };
       
  return (  <div>
     {currentCategory ? (

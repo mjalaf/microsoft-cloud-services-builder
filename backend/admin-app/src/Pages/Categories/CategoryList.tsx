@@ -23,7 +23,7 @@ useEffect(() => {
   };
 
   const retrieveCategories = () => {
-    ApiService.getAll()
+    ApiService.getProductCategories()
       .then((response) => {
         setCategories(response.data);
       })
@@ -37,6 +37,7 @@ useEffect(() => {
   };
 
   const removeAllCategories = () => {
+    /*
     ApiService.removeAll()
       .then((response) => {
         console.log(response.data);
@@ -45,9 +46,11 @@ useEffect(() => {
       .catch((e) => {
         console.log(e);
       });
+      */
   };
 
   const findByTitle = () => {
+    /*
     ApiService.findByTitle(searchTitle)
       .then((response) => {
         setCategories(response.data);
@@ -55,6 +58,7 @@ useEffect(() => {
       .catch((e) => {
         console.log(e);
       });
+      */
   };
 
   const openCategory = (rowIndex) => {
@@ -65,7 +69,7 @@ useEffect(() => {
 
   const deleteCategory = (rowIndex) => {
     const id = categoriesRef.current[rowIndex].id;
-
+ /*
     ApiService.remove(id)
       .then((response) => {
         navigate("/categories/");
@@ -80,6 +84,7 @@ useEffect(() => {
       .catch((e) => {
         console.log(e);
       });
+      */
   };
 
   const columns = useMemo(
