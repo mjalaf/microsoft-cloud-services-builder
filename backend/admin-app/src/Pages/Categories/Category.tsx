@@ -102,6 +102,18 @@ const Category =  (props) => {
               onChange={handleInputChange}
             />
           </div>
+          <div className="form-group">
+            <label htmlFor=">cssClass">Css Class</label>
+            <input
+              type="text"
+              className="form-control"
+              id="cssClass"
+              name="cssClass"
+              value={currentCategory.cssClass}
+              onChange={handleInputChange}
+            />
+          </div>
+
 
           <div className="form-group">
             <label>

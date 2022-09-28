@@ -1,7 +1,7 @@
 import http from "../http-common";
 
 const getAll = () => {
-  return http.get(`products/${process.env.REACT_APP_AZURE_FUNCTION_CODE}`);
+  return http.get(`productcategory/${process.env.REACT_APP_AZURE_FUNCTION_CODE}`);
 };
 
 const get = (id) => {
