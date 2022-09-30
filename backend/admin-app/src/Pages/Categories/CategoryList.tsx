@@ -1,13 +1,13 @@
 import React, { useEffect, useMemo, useRef, useState } from "react";
 import ApiService from "../../services/ApiService";
-import { ISectionBase, ISectionCategory } from "../../Shared/interfaces";
+import { IProductCategory } from "../../Shared/interfaces";
 import { useNavigate  } from "react-router-dom";
 import { useTable } from "react-table";
 
 const CategoryList  = (props) => {
-const [caterogies, setCategories] = useState<ISectionCategory[]>([]);
+const [caterogies, setCategories] = useState<IProductCategory[]>([]);
 const [searchTitle, setSearchTitle] = useState("");
-const categoriesRef = useRef<ISectionCategory[]>([]);
+const categoriesRef = useRef<IProductCategory[]>([]);
 
 const navigate = useNavigate();
 categoriesRef.current = caterogies;

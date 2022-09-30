@@ -1,5 +1,5 @@
 import { getCosmosDBContainer } from "../shared/cosmosDBContext";
-import { IProduct } from "../shared/interfaces";
+import { IArchitecture, IProduct } from "../shared/interfaces";
 
 export async function getAllProductsfromCosmosDb() : Promise<IProduct[]>
 {
@@ -25,7 +25,7 @@ export async function getProductsByProdCategoryIdfromCosmosDb(prodCategoryID :St
      return resources;
 }
 
-export async function getProductsByIdfromCosmosDb(productID :String) : Promise<IProduct[]>
+export async function getProductByIdfromCosmosDb(productID :String) : Promise<IProduct>
 {
     const { container }  = await getCosmosDBContainer();
 
@@ -38,3 +38,29 @@ export async function getProductsByIdfromCosmosDb(productID :String) : Promise<I
 
    return resources;
 }
+
+export async function upsertProductCosmosDb(product: IProduct) : Promise<string>
+{
+    const { container }  = await getCosmosDBContainer();
+    const { resource } = await container.items.upsert(product);
+
+    return resource;
+}
+
+export async function upsertArchitectureCosmosDb(product: IArchitecture) : Promise<string>
+{
+    const { container }  = await getCosmosDBContainer();
+    const { resource } = await container.items.upsert(product);
+
+    return resource;
+}
+
+
+export const resourceRepository = {
+
+    getAllProductsfromCosmosDb,
+    getProductsByProdCategoryIdfromCosmosDb,
+    getProductByIdfromCosmosDb,
+    upsertProductCosmosDb,
+    upsertArchitectureCosmosDb
+  }

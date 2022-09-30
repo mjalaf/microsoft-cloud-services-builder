@@ -1,10 +1,10 @@
 import React, { useState } from "react";
 import TutorialDataService from "../../services/ApiService";
-import { ISectionCategory } from "../../Shared/interfaces";
+import { IProductCategory } from "../../Shared/interfaces";
 
 
 const AddCategory = () => {
-const [category, setCategory] = useState<ISectionCategory>();
+const [category, setCategory] = useState<IProductCategory>();
 
  return (<div>    
 

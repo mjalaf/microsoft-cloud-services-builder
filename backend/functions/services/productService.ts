@@ -1,41 +1,22 @@
-import { getAllProductsfromCosmosDb, getProductsByIdfromCosmosDb, getProductsByProdCategoryIdfromCosmosDb } from "../repositories/productRepository";
+import { resourceRepository } from "../repositories/resourceRepository";
 import { IProduct } from "../shared/interfaces";
 
-export async function processProductRequest(queryString): Promise<IProduct[]>
+export function upsertProduct(product : IProduct) : Promise<string>
 {
-
-if (queryString.id != undefined || queryString.category != null )
-    {
-        const id = queryString.id;
-       
-        if (id != undefined)
-            return getProductsByIdfromCosmosDb(id);
-
-        const category = queryString.category;
-        
-        if (category != undefined)
-            return getProductsByProdCategoryIdfromCosmosDb(category)
-    }
-    else
-      return  getAllProductsfromCosmosDb();
-
-    return null;
-
+    return resourceRepository.upsertProductCosmosDb(product);
 }
 
-/*
-async function getAllProducts() : Promise<IProduct[]>
+export async function getAllProducts() : Promise<IProduct[]>
 {
-    return getAllProductsfromCosmosDb();
+    return resourceRepository.getAllProductsfromCosmosDb();
 }
 
- async function getProductsByProdCategoryId(prodCategoryID :String) : Promise<IProduct[]>
+export async function getProductsByCategoryId(prodCategoryID :String) : Promise<IProduct[]>
 {
-    return getProductsByProdCategoryIdfromCosmosDb(prodCategoryID);
+    return resourceRepository.getProductsByProdCategoryIdfromCosmosDb(prodCategoryID);
 }
 
- async function getProductsById(productID :String) : Promise<IProduct[]>
+export async function getProductById(productID :String) : Promise<IProduct>
 {
-    return getProductsByIdfromCosmosDb(productID);
+    return resourceRepository.getProductByIdfromCosmosDb(productID);
 }
-*/

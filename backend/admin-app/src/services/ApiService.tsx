@@ -25,11 +25,11 @@ const get = (id) => {
 };
 
 const postProductCategory = (data) => {
-  return http.post("/tutorials", data);
+  return http.post(`/productcategory/${process.env.REACT_APP_AZURE_FUNCTION_CODE}`, data);
 };
 
 const postProduct = (data) => {
-  return http.post("/tutorials", data);
+  return http.post(`/product/${process.env.REACT_APP_AZURE_FUNCTION_CODE}`, data);
 };
 
 

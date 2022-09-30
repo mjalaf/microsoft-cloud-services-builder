@@ -1,20 +1,53 @@
-export interface IProductCategory {
+export interface ICategoryBase {
+    id?: string;
     name: string;
-    serviceNames: string[];
+    partitionKey?: string;
     cssClass: string;
-    services: IProduct[];
+    description: string;
+
 }
 
-export interface IProduct {
+export interface IResourceBase{
+    id?: string;
     name: string;
+    partitionKey: string;
     description: string;
+    parent:string;
     image: string;
     cssClass: string;
-    category: string;
-    relatedServices: string[];
-    azureCLICommand: string[];
     documents: IDocument[];
+}
+
+export interface IProductCategory extends ICategoryBase {
+   
+}
+
+export interface IScenarioCategory extends ICategoryBase {
+   
+    components?: IResourceId[];
+
+}
+
+export interface IArchitectureCategory extends ICategoryBase {
+   
+    components?: IArchitecture[];
+}
+
+
+export interface IArchitecture extends IResourceBase {
+
+    childs?: IResourceId[];
+}
+
+
+export interface IProduct extends IResourceBase {
+    azureCLICommand: string[];
     learnContent: ILearnContent[]
+}
+
+interface IResourceId
+{
+    id:string;
 }
 
 export interface IDocument {

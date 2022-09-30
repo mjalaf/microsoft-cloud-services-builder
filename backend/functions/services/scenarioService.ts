@@ -2,25 +2,25 @@ import { categoryRepository } from "../repositories/categoryRepository";
 import { IProductCategory } from "../shared/interfaces";
 import { util } from "../shared/util";
 
-const section= 'ProductCategory';
+const section= 'ProductScenario';
 
-export function getProductCategories() : Promise<IProductCategory[]>
+export function getScenarioCategories() : Promise<IProductCategory[]>
 {
     return categoryRepository.getProductsFromSectionfromCosmosDb(section)
 }
 
-export function getProductCategoryById(id : string) : Promise<IProductCategory>
+export function getScenarioCategoryById(id : string) : Promise<IProductCategory>
 {
     return categoryRepository.getCategoryByIdfromCosmosDb(id, section);
 }
 
-export function upsertProductCategory(productCategory : IProductCategory) : Promise<string>
+export function upsertScenarioCategory(productCategory : IProductCategory) : Promise<string>
 {
     productCategory.partitionKey=section;
     if (productCategory.id === undefined)
     {
-        const index = util.getIndex();
-        productCategory.id = "ARCHCAT-" + index;
+        const index =  util.getIndex();
+        productCategory.id = "SRVCAT-" + index;
 
     }
     return categoryRepository.upsertCategoryCosmosDb(productCategory);

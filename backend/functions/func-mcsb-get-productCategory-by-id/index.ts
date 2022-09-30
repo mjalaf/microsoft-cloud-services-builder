@@ -1,18 +1,20 @@
 import { AzureFunction, Context, HttpRequest } from "@azure/functions"
-import { getProductsCategory } from "../services/productCategoryService";
+import { getProductCategoryById } from "../services/productCategoryService";
 import { IProductCategory } from "../shared/interfaces";
 
 const httpTrigger: AzureFunction = async function (context: Context, req: HttpRequest): Promise<void> {
+try 
+    {
+        var id = context.bindingData.id;
 
-    try {
-        let productCategories = await getProductsCategory();
-    
+        let productCategories = await getProductCategoryById(id);
+
         context.res = {
             status: 200, 
             headers: {
                 "Content-Type": "application/json",
             },
-            body: productCategories
+            body: productCategories[0]
         };
     } catch (error) {
         

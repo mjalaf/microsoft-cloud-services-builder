@@ -1,10 +1,10 @@
 import React, { useState } from "react";
 import TutorialDataService from "../../services/ApiService";
-import { IComponent, ISectionBase } from "../../Shared/interfaces";
+import { IProduct } from "../../Shared/interfaces";
 
 
 const ProductList  = (props) => {
-    const [products, setproducts] = useState<IComponent[]>([]);;
+    const [products, setproducts] = useState<IProduct[]>([]);;
 
  return (<div>    
      Product List

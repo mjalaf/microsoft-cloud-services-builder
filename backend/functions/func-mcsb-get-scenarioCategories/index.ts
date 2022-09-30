@@ -1,21 +1,18 @@
 import { AzureFunction, Context, HttpRequest } from "@azure/functions"
-import { getAllProducts } from "../services/productService";
-import { IProduct } from "../shared/interfaces";
+import { getScenarioCategories } from "../services/scenarioService";
 
 const httpTrigger: AzureFunction = async function (context: Context, req: HttpRequest): Promise<void> {
-    context.log('HTTP trigger function processed a request.');
-    //const name = (req.query.name || (req.body && req.body.name));
+
     try {
-        let products : IProduct[] = await getAllProducts();
+        let productCategories = await getScenarioCategories();
     
         context.res = {
+            status: 200, 
             headers: {
                 "Content-Type": "application/json",
             },
-            
-            body: products 
+            body: productCategories
         };
-        
     } catch (error) {
         
         context.res = {
@@ -23,8 +20,6 @@ const httpTrigger: AzureFunction = async function (context: Context, req: HttpRe
             body: error
         };
     }
-
-
 };
 
 export default httpTrigger;

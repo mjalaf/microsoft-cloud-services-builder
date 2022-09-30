@@ -6,7 +6,7 @@
       "direction": "in",
       "name": "req",
       "methods": [
-        "get"
+        "post"
       ],
       "route": "productcategory/"
     },
@@ -16,5 +16,5 @@
       "name": "res"
     }
   ],
-  "scriptFile": "../dist/func-mcsb-get-product-category/index.js"
+  "scriptFile": "../dist/func-mcsb-post-productCategory/index.js"
 }

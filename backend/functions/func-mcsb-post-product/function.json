@@ -6,15 +6,15 @@
       "direction": "in",
       "name": "req",
       "methods": [
-        "get"
+        "post"
       ],
-      "route": "productcategory/{id}"
+      "route": "product/"
     },
-    {
+   {
       "type": "http",
       "direction": "out",
       "name": "res"
     }
   ],
-  "scriptFile": "../dist/func-mcsb-get-product-category-by-id/index.js"
+  "scriptFile": "../dist/func-mcsb-post-product/index.js"
 }

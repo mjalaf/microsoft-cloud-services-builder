@@ -1,13 +1,15 @@
 import React, { useEffect, useState } from "react";
 import { useParams } from "react-router-dom";
 import ApiService from "../../services/ApiService";
-import { ISectionCategory } from "../../Shared/interfaces";
+import { IProductCategory } from "../../Shared/interfaces";
+import { useNavigate  } from "react-router-dom";
 
 const Category =  (props) => {
-    const [currentCategory, setCurrentCategory] = useState<ISectionCategory>();
+    const [currentCategory, setCurrentCategory] = useState<IProductCategory>();
     const [message, setMessage] = useState("");
     const params = useParams();
-    
+    const navigate = useNavigate();
+
     const getCategory = id => {
         ApiService.getProductCategoryById(id)
           .then(response => {
@@ -25,9 +27,10 @@ const Category =  (props) => {
     
       const handleInputChange = event => {
         const { name, value } = event.target;
+        
         setCurrentCategory({ ...currentCategory, [name]: value });
       };
-    
+    /*
       const updatePublished = status => {
         var category = currentCategory !== undefined ? currentCategory : {};
 
@@ -48,7 +51,7 @@ const Category =  (props) => {
             console.log(e);
           });
       };
-    
+    */
       const updateCategory = () => {
         var category = currentCategory !== undefined ? currentCategory : {};
 
@@ -75,14 +78,22 @@ const Category =  (props) => {
           });
   */
         };
-      
- return (  <div>
+        const addProduct = () => {
+          var category = currentCategory !== undefined ? currentCategory : {};
+
+          const id = category.id;
+          navigate("../addproduct/" + id);
+         // props.history.push();
+        };
+
+ return (  
+ <div>
     {currentCategory ? (
-      <div className="edit-form">
+      <div>
         <h4>Category</h4>
-        <form>
+        <form className="row g-3">
           <div className="form-group">
-            <label htmlFor="id">ID</label>
+            <label htmlFor="id" className="form-label">ID</label>
             <input
               type="text"
               className="form-control"
@@ -91,20 +102,31 @@ const Category =  (props) => {
               value={currentCategory.id}
               onChange={handleInputChange}
             />
+           <div className="form-group">
+            <label htmlFor="name" className="form-label">Name</label>
+            <input
+              type="text"
+              className="form-control"
+              id="name"
+              name="name"
+              value={currentCategory.name}
+              onChange={handleInputChange}
+            />
+          </div>
           </div>
           <div className="form-group">
-            <label htmlFor="description">Description</label>
+            <label htmlFor="description" className="form-label">Description</label>
             <input
               type="text"
               className="form-control"
               id="description"
               name="description"
-              value={currentCategory.name}
+              value={currentCategory.description}
               onChange={handleInputChange}
             />
           </div>
           <div className="form-group">
-            <label htmlFor=">cssClass">Css Class</label>
+            <label htmlFor=">cssClass" className="form-label">Css Class</label>
             <input
               type="text"
               className="form-control"
@@ -114,47 +136,22 @@ const Category =  (props) => {
               onChange={handleInputChange}
             />
           </div>
-
-
-          <div className="form-group">
-            <label>
-              <strong>Status:</strong>
-            </label>
-            {currentCategory.published ? "Published" : "Pending"}
-          </div>
+          <div className="col-12">
+            <button className="btn btn-danger me-md-2" onClick={deleteCategory}>
+              Delete
+            </button>
+            <button type="submit" className="btn btn-primary me-md-2" onClick={updateCategory}>
+              Update
+            </button>
+            <button type="submit" className="btn btn-primary me-md-2" onClick={addProduct} >
+              Add Product
+            </button>
+            <p>{message}</p>
+         </div>
         </form>
-
-        {currentCategory.published ? (
-          <button
-            className="badge badge-primary mr-2"
-            onClick={() => updatePublished(false)}
-          >
-            UnPublish
-          </button>
-        ) : (
-          <button
-            className="badge badge-primary mr-2"
-            onClick={() => updatePublished(true)}
-          >
-            Publish
-          </button>
-        )}
-
-        <button className="badge badge-danger mr-2" onClick={deleteCategory}>
-          Delete
-        </button>
-
-        <button
-          type="submit"
-          className="badge badge-success"
-          onClick={updateCategory}
-        >
-          Update
-        </button>
-        <p>{message}</p>
       </div>
     ) : (
-      <div>
+      <div className="col-12">
         <br />
         <p>Please click on a Category...</p>
       </div>

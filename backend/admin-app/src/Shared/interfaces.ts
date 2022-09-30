@@ -1,14 +1,62 @@
-export interface ICategory
+export interface ICategoryBase {
+  id?: string;
+  name?: string;
+  partitionKey?: string;
+  cssClass?: string;
+  description?: string;
+  
+}
+
+export interface IResourceBase{
+  id?: string;
+  name?: string;
+  description?: string;
+  parent?:string;
+  image?: string;
+  cssClass?: string;
+  documents?: IDocument[];
+}
+
+
+ export interface IProductCategory extends ICategoryBase {
+   
+}
+export interface IScenarioCategory extends ICategoryBase {
+   
+    components?: IResourceId[];
+}
+
+export interface IArchitectureCategory extends ICategoryBase {
+   
+    components?: IArchitecture[];
+}
+
+export interface IArchitecture extends IResourceBase {
+
+    childs?: IResourceId[];
+}
+
+export interface IProduct extends IResourceBase {
+    azureCLICommand?: string[];
+    learnContent?: ILearnContent[]
+}
+
+interface IResourceId
 {
-    id?: string;
+    id:string;
+}
+
+export interface IDocument {
     name?: string;
-    cssClass?: string;
-    }
-export interface ISectionCategory extends ICategory {
- //   svcCat: () => Promise<ISectionBase[]>;
-    components?: IComponent[];
-    published?: string;
- }
+    url?: string;
+}
+
+export interface ILearnContent extends IDocument {
+    type: LearnType;
+    image: string;
+    modules: IDocument[]
+}
+/*
 
 export interface ISectionBase {
     id?: string;
@@ -20,7 +68,7 @@ export interface ISectionBase {
     azureCLICommand?: string[];
     documents?: IDocument[];
     learnContent?: ILearnContent[];
-    published?: boolean;
+  //  published?: boolean;
 }
 
 export interface IComponent extends ISectionBase
@@ -28,6 +76,19 @@ export interface IComponent extends ISectionBase
     childs : IChildComponent[];
 
 }
+
+export interface ICategory
+{
+    id?: string;
+    name?: string;
+    cssClass?: string;
+    description?: string;
+}
+export interface ISectionCategory extends ICategory {
+ //   svcCat: () => Promise<ISectionBase[]>;
+    components?: IComponent[];
+    published?: string;
+ }
 
 export interface IChildComponent extends ISectionBase
 {
@@ -44,4 +105,5 @@ export interface IChildComponent extends ISectionBase
     image: string;
     modules: IDocument[]
   }
+  */
   export type LearnType = 'path' | 'module';
