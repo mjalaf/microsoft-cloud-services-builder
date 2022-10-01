@@ -11,6 +11,7 @@ export interface IResourceBase{
   id?: string;
   name?: string;
   description?: string;
+  link?:string;
   parent?:string;
   image?: string;
   cssClass?: string;
@@ -38,7 +39,7 @@ export interface IArchitecture extends IResourceBase {
 
 export interface IProduct extends IResourceBase {
     azureCLICommand?: string[];
-    learnContent?: ILearnContent[]
+    learnContent?: ILearnContent
 }
 
 interface IResourceId
@@ -52,9 +53,9 @@ export interface IDocument {
 }
 
 export interface ILearnContent extends IDocument {
-    type: LearnType;
-    image: string;
-    modules: IDocument[]
+    type?: LearnType;
+    image?: string;
+    modules?: IDocument[]
 }
 /*
 
